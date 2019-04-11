@@ -78,14 +78,13 @@ class BingerSpider(scrapy.Spider):
 
 
     def parse(self, response):
-    
-        for i in range(1,11):
-            x =response.xpath('//body//text()'.format(i)).extract()
-            y =''.join(x)
-            email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+",y)
-            
+        x = response.xpath('//body//text()').extract()
+        text = ''.join(x)
+        email = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+",text)
+        
+        for x in email:
             yield{
-                'email': email
+                'email':x
             }
             
 
