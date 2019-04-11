@@ -15,4 +15,13 @@ Medicine
 Art History
 Communication technology
 IT
+teenager
+football
+rugby
+basketball
+hockey
+cycling
+tennis
+chess
+games
 
