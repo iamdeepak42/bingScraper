@@ -14,7 +14,7 @@ class BingerSpider(scrapy.Spider):
     data = pd.read_csv('input.csv')
     data = data['keywords']
 
-    count = pd.read_csv('states.csv')
+    count = pd.read_csv('state.csv')
     count = count['states']
     counter=0
     for d in data:
