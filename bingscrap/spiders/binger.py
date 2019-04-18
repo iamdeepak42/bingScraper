@@ -1,24 +1,33 @@
 # -*- coding: utf-8 -*-
-import scrapy
+import os
 import re
-import  pandas as pd
+
+import scrapy
+
+import pandas as pd
 
 
 class BingerSpider(scrapy.Spider):
     name = 'binger'
     allowed_domains = ['bing.com']
     start_urls = []
-    data = pd.read_csv('/home/deepak/Desktop/bingScraper/input.csv')
+    data = pd.read_csv('input.csv')
     data = data['keywords']
 
-    count = pd.read_csv('/home/deepak/Desktop/bingScraper/count.csv')
+    count = pd.read_csv('states.csv')
     count = count['states']
+    counter=0
     for d in data:
         for e in count:
             start_urls.append('https://www.bing.com/search?q=site:linkedin.com "gmail.com" '+'"'+d+'"'+'"'+e+'"')
             start_urls.append('https://www.bing.com/search?q=site:linkedin.com "yahoo.com" '+'"'+d+'"'+'"'+e+'"')
             start_urls.append('https://www.bing.com/search?q=site:linkedin.com "msn.com" '+'"'+d+'"'+'"'+e+'"')
             start_urls.append('https://www.bing.com/search?q=site:linkedin.com "ymail.com" '+'"'+d+'"'+'"'+e+'"')
+            
+            start_urls.append('https://www.bing.com/search?q="gmail.com" '+'"'+d+'"'+'"'+e+'"')
+            start_urls.append('https://www.bing.com/search?q="yahoo.com" '+'"'+d+'"'+'"'+e+'"')
+            start_urls.append('https://www.bing.com/search?q="msn.com" '+'"'+d+'"'+'"'+e+'"')
+            start_urls.append('https://www.bing.com/search?q="ymail.com" '+'"'+d+'"'+'"'+e+'"')
 
             start_urls.append('https://www.bing.com/search?q=site:instagram.com "gmail.com" '+'"'+d+'"'+'"'+e+'"')
             start_urls.append('https://www.bing.com/search?q=site:instagram.com "yahoo.com" '+'"'+d+'"'+'"'+e+'"')
@@ -90,7 +99,10 @@ class BingerSpider(scrapy.Spider):
             yield{
                 'email':x
             }
-            
+            self.counter+=1
+            # os.system('clear')
+            print('Total Emails:',self.counter)
+            print('email:',x)
 
 
         # follow pagination link
@@ -98,6 +110,3 @@ class BingerSpider(scrapy.Spider):
         if next_page_url:
             next_page_url = response.urljoin(next_page_url)
             yield scrapy.Request(url=next_page_url, callback=self.parse)
-
-
-

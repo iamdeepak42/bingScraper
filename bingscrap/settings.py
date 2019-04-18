@@ -13,8 +13,9 @@ BOT_NAME = 'bingscrap'
 
 SPIDER_MODULES = ['bingscrap.spiders']
 NEWSPIDER_MODULE = 'bingscrap.spiders'
+LOG_LEVEL = 'INFO'
 
-
+# LOG_ENABLED=False
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'bingscrap (+http://www.yourdomain.com)'
 
@@ -22,7 +23,7 @@ NEWSPIDER_MODULE = 'bingscrap.spiders'
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 100
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
